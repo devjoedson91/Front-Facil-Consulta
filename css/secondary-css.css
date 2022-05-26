@@ -1,0 +1,156 @@
+:root {
+  --bs-color-primary: #483698;
+  --bs-color-btnYellow: #FBDE40;
+  --bs-color-btnYellowHover: #FFE766;
+  --bs-font-title-button: 'Comfortaa', sans-serif;
+  --bs-font-default: 'Open Sans', sans-serif;
+}
+
+body {
+
+    font-family: var(--bs-font-default);
+    background-color: var(--bs-color-btnYellow);
+}
+
+.container {
+
+  display: flex;
+  justify-content: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+
+}
+
+.main-container {
+    
+  width: 80%;
+  background-color: #fff;
+  border-radius: 1.5rem;
+  padding: 5% 9% 5% 9%;
+  
+}
+
+h1, h2, a {
+
+    font-family: var(--bs-font-title-button);
+    font-weight: bold;
+    color: var(--bs-color-primary);
+
+}
+
+
+.btn-primary {
+
+    width: 95%;
+    background-color: var(--bs-color-primary);
+    font-family: var(--bs-font-title-button);
+    border-style: none;
+    border-radius: 12px;
+
+}
+
+.btn-yellow {
+
+  width: 95%;
+  background-color: var(--bs-color-btnYellow);
+  font-family: var(--bs-font-title-button);
+  border-style: none;
+  border-radius: 12px;
+  color: var(--bs-color-primary);
+}
+
+.btn-yellow:hover {
+
+  background-color: var(--bs-color-btnYellowHover);
+
+}
+
+#progress-bar {
+
+    background-color: var(--bs-color-primary);
+
+}
+
+#cpf, #numero, #valor-consulta {
+
+    width: 75%;
+}
+
+.row-select {
+
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.inputCity, .inputState {
+    width: 170px;
+}
+
+.bg-main {
+
+    background-color: var(--bs-color-primary);
+    color: #fff;
+
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-color-primary);
+    border-color: transparent;
+}
+
+.ms-6 {
+    margin-left: 4rem !important;
+}
+
+.align-items-center {
+
+    display: flex;
+    align-items: center;
+
+}
+
+
+/* bootstrap 4.6 */
+
+
+.breadcrumb {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+  }
+  
+  .breadcrumb-item + .breadcrumb-item {
+    padding-left: 0.5rem;
+  }
+  
+  .breadcrumb-item + .breadcrumb-item::before {
+    float: left;
+    padding-right: 0.5rem;
+    color: #6c757d;
+    content: "/";
+  }
+  
+  .breadcrumb-item + .breadcrumb-item:hover::before {
+    text-decoration: underline;
+  }
+  
+  .breadcrumb-item + .breadcrumb-item:hover::before {
+    text-decoration: none;
+  }
+  
+  .breadcrumb-item.active {
+    color: #6c757d;
+  }
+
+
+
+
+
