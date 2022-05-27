@@ -17,14 +17,17 @@
   <body>
 
     <div class="container">
+        <div class="btn-back fs-4">
+            <a href="/views/index.html"><</a>
+        </div>
         <div class="row main-container shadow p-5">
-            <div class="col-6">
+            <div class="col-6 form-main">
             
                 <h2 class="mb-4">Sobre o profissional</h2>
 
-                <h5 class="mb-4">Detalhes do atendimento</h5>
+                <h5 class="mb-4 fw-bold">Detalhes do atendimento</h5>
 
-                <form action="">
+                <form action="/views/review.html">
                     
                     <div class="mb-3">
                         
@@ -45,7 +48,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-5" aria-label="breadcrumb">
+                    <div class="mb-4" aria-label="breadcrumb">
                         <label for="form-pgto" class="form-label mb-3">Formas de pagamento da consulta*</label>
                         <div class="breadcrumb mb-3 shadow p-3 bg-body rounded">
                             <div class="breadcrumb-item">
@@ -79,12 +82,15 @@
                         </div>
                     </div>
 
-                    <div class="progress mb-4" style="height: 25px;">
-                        <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div>
+                        <h6 class="num-pagina-progress">2 de 2</h6>
+                        <div class="progress mb-3" style="height: 25px;">            
+                            <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 66.66%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
 
                     <div class="mx-auto text-center">
-                        <button type="button" class="btn btn-primary">PRÓXIMO</button>
+                        <button type="submit" class="btn btn-primary">PRÓXIMO</button>
                     </div>
                    
                 </form>

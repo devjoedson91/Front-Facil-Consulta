@@ -9,7 +9,8 @@
 body {
 
     font-family: var(--bs-font-default);
-    background-color: var(--bs-color-btnYellow);
+    background-color: var(--bs-color-btnYellowHover);
+
 }
 
 .container {
@@ -22,12 +23,80 @@ body {
 }
 
 .main-container {
-    
+  
   width: 80%;
   background-color: #fff;
   border-radius: 1.5rem;
-  padding: 5% 9% 5% 9%;
+  /* padding: 5% 9% 5% 9%; */
   
+}
+
+@media (max-width: 375px) {
+
+    body {
+
+        overflow-x: hidden;
+
+    }
+
+    .container {
+
+        padding: 0;
+        margin: 0;
+
+    }
+
+    .main-container {
+        
+        width: 100%;
+        border-top-left-radius: 2.5rem;
+        border-top-right-radius: 2.5rem;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-top: 50px;
+                
+    }
+
+    .form-main {
+        
+        width: 100%;
+        padding: 35px 5px 35px 5px;
+        
+    }
+
+    .p-5 {
+
+        padding: 0.5rem !important;
+
+    }
+
+    .btn-back {
+
+        position: absolute;
+        cursor: pointer;
+        left: 7%;
+        top: 5px;
+        display: block;
+  
+    }
+
+    .btn-back a {
+
+        text-decoration: none;
+        color: var(--bs-color-primary);
+    
+    }
+
+    .img, .img-fluid {
+
+        display: none;
+
+    }
+
+    .inputCity, .inputState {
+        max-width: 130px;
+    }
+
 }
 
 h1, h2, a {
@@ -35,6 +104,12 @@ h1, h2, a {
     font-family: var(--bs-font-title-button);
     font-weight: bold;
     color: var(--bs-color-primary);
+
+}
+
+h4, h5, h6 {
+
+    font-family: var(--bs-font-default);
 
 }
 
@@ -68,7 +143,19 @@ h1, h2, a {
 #progress-bar {
 
     background-color: var(--bs-color-primary);
+    text-align: center;
 
+}
+
+.num-pagina-progress {
+
+    position: relative;
+    font-family: var(--bs-font-title-button);
+    font-weight: bold;
+    color: var(--bs-color-primary);
+    left: 75%;
+    top: 30px;
+    
 }
 
 #cpf, #numero, #valor-consulta {
@@ -80,7 +167,6 @@ h1, h2, a {
 
     display: flex;
     justify-content: space-between;
-
 
 }
 
