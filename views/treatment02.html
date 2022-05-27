@@ -27,24 +27,29 @@
 
                 <h5 class="mb-4 fw-bold">Detalhes do atendimento</h5>
 
-                <form action="/views/review.html">
+                <form action="/views/review.html" class="row needs-validation" novalidate>
                     
                     <div class="mb-3">
                         
                         <label for="especialidade" class="form-label">Especialidade principal*</label>
-                        <select name="especialidade" class="form-select">
-                            <option selected>Selecione a especialidade</option>
+                        <select name="especialidade" class="form-select" required>
+                            <option value="">Selecione a especialidade</option>
                             <option value="">ACRE</option>
                             <option value="">CEARA</option>
                             <option value="">ESPIRITO SANTO</option>
                         </select>    
-                        
+                        <div class="invalid-feedback">
+                            Error message
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="valor" class="form-label">Informe o preço da consulta*</label>
                         <div class="input-group flex-nowrap" id="valor-consulta">
                             <span class="input-group-text bg-main" id="addon-wrapping">R$</span>
-                            <input type="text" class="form-control" placeholder="Valor">
+                            <input type="text" class="form-control" placeholder="Valor" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Error message
                         </div>
                     </div>
 
@@ -106,5 +111,26 @@
 
     <script src="../js/jquery-3.3.1.slim.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script>
+
+        (() => {
+
+            const form = document.querySelector('.needs-validation');
+
+            form.addEventListener('submit', event => {
+
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated');
+            
+            }, false);
+          
+
+        })()
+
+    </script>
   </body>
 </html>
