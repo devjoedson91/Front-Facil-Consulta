@@ -1,22 +1,6 @@
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <!-- required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Fácil Consulta</title>
+<template>
 
-    <!-- bootstrap css -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/secondary-css.css" rel="stylesheet">
-
-    <!-- fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" type="text/css">
-
-  </head>
-  <body>
-
-    <div class="container">
+   <div class="container">
         <div class="row main-container shadow p-5">
             <div class="col-6 form-main">
             
@@ -24,11 +8,11 @@
 
                 <h5 class="mb-4 fw-bold">Dados do profissional</h5>
 
-                <form action="/views/treatment02.html" class="row needs-validation" novalidate>
+                <form action="treatment02.html" class="row needs-validation" novalidate>
                     
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome completo*</label>
-                        <input type="text" id="profissional" class="form-control" placeholder="Digite o nome completo" required>
+                        <input type="text" v-model="input_name" id="profissional" class="form-control" placeholder="Digite o nome completo" required>
                         <div class="invalid-feedback">
                             Error message
                         </div>
@@ -83,42 +67,35 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">PRÓXIMO</button>
+                        <button type="submit" class="btn btn-primary" v-on:click="submitForm">PRÓXIMO</button>
                     </div>
                    
                 </form>
             </div>
 
             <div class="col-6 mx-auto align-items-center img">
-                <img src="../public/desktop-pagina-1.png" class="img-fluid" width="100%" height="auto" alt="desk-pagina1">
+                <img src="../../public/img/desktop-pagina-1.png" class="img-fluid" alt="desk-pagina1">
             </div>
 
         </div>
-        
-    </div>
+   </div>
+    
 
-    <script src="../js/jquery-3.3.1.slim.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script>
+</template>
 
-        (() => {
 
-            const form = document.querySelector('.needs-validation');
+<script>
 
-            form.addEventListener('submit', event => {
+    export default {
 
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
+        name: 'Cadastro'
 
-                form.classList.add('was-validated');
-            
-            }, false);
-          
+    }
 
-        })()
+</script>
 
-    </script>
-  </body>
-</html>
+<style scoped>
+
+    @import '../app.scss';
+
+</style>
