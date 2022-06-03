@@ -355,13 +355,22 @@
 
                 const inputsForm = document.querySelectorAll('input');
                 const selectsForm = document.querySelectorAll('select');
+                const optionsEstado = document.querySelectorAll('#estado .option-select');
 
                 selectsForm.forEach(select => { 
 
                     switch (select.name) {
 
                         case 'estado':
-                            select.value = estado;
+                            optionsEstado.forEach(option => {
+
+                                if (option.innerHTML === estado) {
+
+                                    option.setAttribute('selected', 'selected');
+
+                                }
+
+                            });
                             break;
                         case 'cidade':
                             let option = document.createElement('option');
