@@ -76,9 +76,7 @@
                         </div>
                     </div>
 
-                    <div class="mx-auto text-center">
-                        <button type="submit" class="btn btn-primary">PRÓXIMO</button>
-                    </div>
+                    <ProximoBtn />
                    
                 </form>
             </div>
@@ -99,11 +97,16 @@
 
     import api from '@/services/api';
     import Cleave from 'cleave.js';
+    import ProximoBtn from '@/components/ProximoBtn.vue';
+import ProximoBtn from '@/components/ProximoBtn.vue';
     
     export default {
 
         name: 'Atendimento',
-
+        components: {
+    ProximoBtn,
+    ProximoBtn
+},
         data() {
             
             return {

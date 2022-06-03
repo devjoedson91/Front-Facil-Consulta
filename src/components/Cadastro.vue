@@ -63,9 +63,7 @@
                         </div>
                     </div>
 
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">PRÓXIMO</button>
-                    </div>
+                    <ProximoBtn />
                    
                 </form>
             </div>
@@ -85,10 +83,16 @@
 
     import api from '@/services/api.js';
     import Cleave from 'cleave.js';
+    import ProximoBtn from './ProximoBtn.vue';
     
     export default {
 
         name: 'Cadastro',
+        components: {
+
+            ProximoBtn
+
+        },
         data() {
 
             return {
