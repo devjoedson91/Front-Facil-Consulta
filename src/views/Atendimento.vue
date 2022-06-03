@@ -40,8 +40,8 @@
                         <div class="breadcrumb mb-3 shadow p-3 bg-body rounded">
                             <div class="breadcrumb-item">
                                 <div class="form-check">
-                                    <input class="form-check-input ms-4" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label ms-4" for="defaultCheck1">
+                                    <input class="form-check-input ms-4" type="checkbox" value="" id="pix">
+                                    <label class="form-check-label ms-4" for="pix">
                                       Pix
                                     </label>
                                 </div>
@@ -50,8 +50,8 @@
                         <div class="breadcrumb mb-3 shadow p-3 bg-body rounded">
                             <div class="breadcrumb-item">
                                 <div class="form-check">
-                                    <input class="form-check-input ms-4" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label ms-4" for="defaultCheck1">
+                                    <input class="form-check-input ms-4" type="checkbox" value="" id="dinheiro">
+                                    <label class="form-check-label ms-4" for="dinheiro">
                                       Em dinheiro
                                     </label>
                                 </div>
@@ -60,8 +60,8 @@
                         <div class="breadcrumb mb-3 shadow p-3 bg-body rounded">
                             <div class="breadcrumb-item">
                                 <div class="form-check">
-                                    <input class="form-check-input ms-4" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label ms-4" for="defaultCheck1">
+                                    <input class="form-check-input ms-4" type="checkbox" value="" id="cartao">
+                                    <label class="form-check-label ms-4" for="cartao">
                                       Cartão de crédito
                                     </label>
                                 </div>
@@ -162,6 +162,30 @@
 
             },
 
+            checkedPgto() {
+
+                const formsPgto = document.querySelectorAll('.form-check-input');
+
+                formsPgto.forEach(formPgto => {
+
+                    formPgto.addEventListener('click', e => {
+                        
+                        if (formPgto.checked) {
+
+                           formPgto.setAttribute("checked", "true");
+
+                        } else {
+
+                            formPgto.setAttribute("checked", "false");
+
+                        }
+
+                    }, false);
+
+                });
+
+            },
+
              submitForm() {
 
                 const form = document.querySelector('.needs-validation');
@@ -176,13 +200,34 @@
 
                     } else {
 
-                        event.preventDefault();
-                        event.stopPropagation();
+                        // event.preventDefault();
+                        // event.stopPropagation();
 
                         const especialidade = document.querySelector('#especialidade').value;
                         const valorConsulta = document.querySelector('#valor').value;
+                        const formInputs = document.querySelectorAll('.form-check-input');
+                        const labels = document.querySelectorAll('.form-check label');
+                        let formsPgto = '';
+
+                        formInputs.forEach((item, index) => {
+
+                            if (item.checked) {
+
+                                for (let i = 0; i < labels.length; i++) {
+
+                                    formsPgto += labels[index].innerHTML;
+                                    break;
+
+                                }
+
+                                console.log(formsPgto);
+                            }
+
+                        });
                         
-                        this.formValue = {especialidade, valorConsulta};
+                        this.formValue = {especialidade, valorConsulta, formsPgto};
+
+
 
                         if (localStorage.length === 0) {
 
@@ -216,6 +261,7 @@
 
             this.getEspecialidades();
             this.inputsValidate();
+            this.checkedPgto();
             this.submitForm();
 
         }

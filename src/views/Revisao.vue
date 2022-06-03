@@ -48,7 +48,7 @@
                 <div class="mb-3">
                     <label for="cpf" class="fw-bold">Forma de pagamento da consulta</label>
                     <div class="input-group flex-nowrap">
-                        <div class="fs-6">{{formPgto}} - {{codicoes}}</div>
+                        <div class="fs-6">{{formsPgto}} {{codicoes}}</div>
                     </div>
                 </div>
 
@@ -89,7 +89,7 @@
                 cidade: '',
                 especialidade: '',
                 valor: 0,
-                formPgto: '',
+                formsPgto: '',
                 condicoes: ''
             }
         },
@@ -99,7 +99,7 @@
 
                 const dadosForm = JSON.parse(localStorage.getItem('dadosForm'));
 
-                const { nome, cpf, numero, estado, cidade, especialidade, valorConsulta } = dadosForm;
+                const { nome, cpf, numero, estado, cidade, especialidade, valorConsulta, formsPgto } = dadosForm;
 
                 this.nome = nome;
                 this.cpf = cpf;
@@ -108,6 +108,7 @@
                 this.cidade = cidade;
                 this.especialidade = especialidade;
                 this.valor = valorConsulta;
+                this.formsPgto = formsPgto;
 
             }
 

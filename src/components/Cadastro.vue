@@ -37,7 +37,7 @@
                             <label for="inputState" class="form-label">Estado*</label>
                             <select name="estado" class="form-select" id="estado" required>
                                 <option value="">Selecione</option>
-                                <option class="option-select" v-for="estado in estados" :key="estado.id" value="estado.id">{{ estado.nome }}</option>
+                                <option class="option-select" v-for="estado in estados" :key="estado.id">{{ estado.nome }}</option>
                             </select>
                             <div class="invalid-feedback">
                                 Error message
@@ -195,7 +195,7 @@
 
                 selectEstado.addEventListener('change', e => {
 
-                    console.log(selectCidade.childNodes.length);
+                    // console.log(selectCidade.childNodes.length);
 
                     if (selectCidade.childNodes.length > 1) {
 
@@ -235,7 +235,7 @@
                                 selectCidade.appendChild(createOption);
                                 createOption.classList.add('option-select');
                                 createOption.text = item.nome;
-                                console.log(createOption);
+                                // console.log(createOption);
 
 
                             }
@@ -291,8 +291,19 @@
                         const nome = document.querySelector('[name=nome]').value;
                         const cpf = document.querySelector('[name=cpf]').value;
                         const numero = document.querySelector('[name=numero]').value;
-                        const estado = document.querySelector('#estado').value;
+                        const optionsEstado = document.querySelectorAll('#estado .option-select');
                         const cidade = document.querySelector('#cidade').value;
+                        let estado = '';
+
+                        optionsEstado.forEach(option => {
+
+                            if (option.selected) {
+
+                                estado += option.innerHTML;
+
+                            }
+
+                        });
 
                         this.formValue = {nome, cpf, numero, estado, cidade};
 
@@ -316,6 +327,8 @@
                             localStorage.setItem('dadosForm', JSON.stringify(this.formValue));
 
                         }
+
+                        console.log(this.formValue);
 
                     }
 
