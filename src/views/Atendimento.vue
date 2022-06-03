@@ -28,7 +28,7 @@
                         <label for="valor" class="form-label">Informe o preço da consulta*</label>
                         <div class="input-group flex-nowrap" id="valor-consulta">
                             <span class="input-group-text bg-main" id="addon-wrapping">R$</span>
-                            <input type="text" name="valor" class="form-control" v-model="valorConsulta" maxlength="6" id="valor" placeholder="Valor" required>
+                            <input type="text" name="valor" class="form-control" v-model="valorConsulta" maxlength="6" id="valor" @keyup="this.inputsValidate()" placeholder="Valor" required>
                         </div>
                         <div class="invalid-feedback">
                             Error message
@@ -96,7 +96,7 @@
 <script>
 
     import api from '@/services/api';
-    import Cleave from 'cleave.js';
+    import { mask, unMask } from 'remask';
     import ProximoBtn from '@/components/ProximoBtn.vue';
     
     export default {
@@ -110,7 +110,7 @@
             return {
 
                 especialidades: null,
-                valorConsulta: '',
+                valorConsulta: null,
                 formValue: null
                 
             }
@@ -144,22 +144,11 @@
 
                 });
 
-                valor.addEventListener('keyup', e => {
+                const valueMask = mask(this.valorConsulta.replace(',',''), ['99,99', '999,99']);
 
-                    console.log(this.valorConsulta);
+                console.log(valueMask);
 
-                });
-
-                new Cleave(valor, {
-                    
-                    numeral: true,
-                    numeralIntegerScale: 6,
-                    numeralDecimalScale: 2,
-                    delimiter: ',',
-                    numeralPositiveOnly: true,
-
-                });
-               
+                valor.value = valueMask;             
 
             },
 
@@ -261,7 +250,6 @@
         async mounted() {
 
             this.getEspecialidades();
-            this.inputsValidate();
             this.checkedPgto();
             this.submitForm();
 
