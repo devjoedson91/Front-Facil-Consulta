@@ -52,9 +52,7 @@
                     </div>
                 </div>
 
-                <div class="mx-auto text-center mt-5 mb-4">
-                    <button type="submit" class="btn btn-yellow fw-bold" v-on:click="submitForm">CADASTRAR PROFISSIONAL</button>
-                </div>
+                <CadastrarBtn />
 
                 <div class="mx-auto text-center">
                     <a href="/" class="text-decoration-none fs-6 fw-bold editCadastro" >Editar cadastro</a>
@@ -76,9 +74,14 @@
 
 <script>
 
+    import CadastrarBtn from '@/components/CadastrarBtn.vue';
+
     export default {
 
         name: 'Revisao',
+        components: {
+            CadastrarBtn
+        },
         data() {
 
             return {

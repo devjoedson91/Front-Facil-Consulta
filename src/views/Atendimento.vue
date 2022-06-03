@@ -98,15 +98,13 @@
     import api from '@/services/api';
     import Cleave from 'cleave.js';
     import ProximoBtn from '@/components/ProximoBtn.vue';
-import ProximoBtn from '@/components/ProximoBtn.vue';
     
     export default {
 
         name: 'Atendimento',
         components: {
-    ProximoBtn,
-    ProximoBtn
-},
+            ProximoBtn
+        },
         data() {
             
             return {
