@@ -200,7 +200,17 @@
                     if (selectCidade.childNodes.length > 1) {
 
                         const selectOptions = document.querySelectorAll('#cidade .option-select');
-                        selectOptions.forEach(option => option.remove());
+                        selectOptions.forEach(option => {
+                            
+                            if (option.hasAttribute('selected')) {
+
+                                console.log('tem selected');
+                            }
+
+                            option.remove();
+                            
+                        });
+
 
                     }          
                   
@@ -208,12 +218,25 @@
 
                         if (item.estadoId == selectEstado.options[selectEstado.selectedIndex].value) {
 
+                            const optionCidades = document.querySelectorAll('#cidade option');
+
+                            optionCidades.forEach(option => {
+
+                                if (option.hasAttribute('selected')) {
+
+                                    option.remove();
+
+                                }
+
+                            });
+
                             if (selectCidade.childNodes.length == 1 || selectCidade.childNodes.length > 1) {                                  
                                 let createOption = document.createElement('option');
                                 selectCidade.appendChild(createOption);
                                 createOption.classList.add('option-select');
                                 createOption.text = item.nome;
                                 console.log(createOption);
+
 
                             }
                                                
@@ -268,23 +291,31 @@
                         const nome = document.querySelector('[name=nome]').value;
                         const cpf = document.querySelector('[name=cpf]').value;
                         const numero = document.querySelector('[name=numero]').value;
-                        const estado = document.querySelector('[name=estado]').value;
+                        const estado = document.querySelector('#estado').value;
                         const cidade = document.querySelector('[name=cidade]').value;
 
                         this.formValue = {nome, cpf, numero, estado, cidade};
 
-                        var dados = localStorage.getItem('dadosForm');
+                        if (localStorage.length > 0) {
 
-                        if (dados == null) {
-
-                            localStorage.setItem('dadosForm', "[]");
-                            dados = [];
+                            localStorage.clear();
 
                         }
+                        
+                        if (localStorage.length == 0) {
 
-                        // dados.push(this.formValue);
+                            let dados = localStorage.getItem('dadosForm');
 
-                        localStorage.setItem('dadosForm', JSON.stringify(this.formValue));
+                            if (dados == null) {
+
+                                localStorage.setItem('dadosForm', "[]");
+                                dados = [];
+
+                            }
+
+                            localStorage.setItem('dadosForm', JSON.stringify(this.formValue));
+
+                        }
 
                     }
 
@@ -303,56 +334,58 @@
             this.validateSelects();
             this.submitForm();
 
-            const dadosForm = JSON.parse(localStorage.getItem('dadosForm'));
+            if (localStorage.length > 0) {
 
-            const { nome, cpf, numero, estado, cidade } = dadosForm;
+                const dadosForm = JSON.parse(localStorage.getItem('dadosForm'));
 
-            console.log(nome);
+                const { nome, cpf, numero, estado, cidade } = dadosForm;
 
-            const inputsForm = document.querySelectorAll('input');
-            const selectsForm = document.querySelectorAll('select');
+                const inputsForm = document.querySelectorAll('input');
+                const selectsForm = document.querySelectorAll('select');
 
-            selectsForm.forEach(select => { 
+                selectsForm.forEach(select => { 
 
-                switch (select.name) {
+                    switch (select.name) {
 
-                    case 'estado':
-                        select.value = estado;
-                        break;
-                    case 'cidade':
-                        let option = document.createElement('option');
-                        select.appendChild(option);
-                        option.setAttribute('selected', 'selected');
-                        option.innerHTML = cidade;
-                        break;
-
-                }
-
-            });
-
-            inputsForm.forEach(input => {
-
-                if (input.value.length < 2) {
-
-                    switch (input.name) {
-
-                        case 'nome': 
-                            input.value = nome;
+                        case 'estado':
+                            select.value = estado;
                             break;
-                        case 'cpf':
-                            input.value = cpf;
+                        case 'cidade':
+                            let option = document.createElement('option');
+                            select.appendChild(option);
+                            option.setAttribute('selected', 'selected');
+                            option.innerHTML = cidade;
                             break;
-                        case 'numero':
-                            input.value = numero;
-                            break;
-                                          
 
                     }
 
-                }
+                });
 
-            });
+                inputsForm.forEach(input => {
 
+                    if (input.value.length < 2) {
+
+                        switch (input.name) {
+
+                            case 'nome': 
+                                input.value = nome;
+                                break;
+                            case 'cpf':
+                                input.value = cpf;
+                                break;
+                            case 'numero':
+                                input.value = numero;
+                                break;
+                                            
+
+                        }
+
+                    }
+
+                });
+
+
+            }
 
         }
 

@@ -12,43 +12,43 @@
                 <div class="row mb-3">
                         
                     <label for="nome" class="fw-bold">Nome completo</label>
-                    <div class="fs-6">Joedson Ferreira Barbosa</div>
+                    <div class="fs-6" >{{ nome }}</div>
                     
                 </div>
                 <div class="mb-3">
                     <label for="cpf" class="fw-bold">CPF</label>
                     <div class="input-group flex-nowrap">
-                        <div class="fs-6">000.000.000-00</div>
+                        <div class="fs-6" >{{ cpf }}</div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="cpf" class="fw-bold">Numero de celular ou telefone</label>
                     <div class="input-group flex-nowrap">
-                        <div class="fs-6">(00) 00000000</div>
+                        <div class="fs-6" >{{ numero }}</div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="cpf" class="fw-bold">Estado/Cidade</label>
                     <div class="input-group flex-nowrap">
-                        <div class="fs-6">Rio Grande do Sul - Pelótas</div>
+                        <div class="fs-6" >{{ estado }} - {{ cidade }}</div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="cpf" class="fw-bold">Especialidade principal</label>
                     <div class="input-group flex-nowrap">
-                        <div class="fs-6">Cardiologia</div>
+                        <div class="fs-6" >{{especialidade}}</div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="cpf" class="fw-bold">Preço da consulta</label>
                     <div class="input-group flex-nowrap">
-                        <div class="fs-6">R$ 200</div>
+                        <div class="fs-6" >R$ {{valor}}</div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="cpf" class="fw-bold">Forma de pagamento da consulta</label>
                     <div class="input-group flex-nowrap">
-                        <div class="fs-6">Cartão de credito - Parcelamento em 2x sem juros</div>
+                        <div class="fs-6">{{formPgto}} - {{codicoes}}</div>
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="mx-auto text-center">
-                    <a href="#" class="text-decoration-none fs-6 fw-bold" >Editar cadastro</a>
+                    <a href="/" class="text-decoration-none fs-6 fw-bold editCadastro" >Editar cadastro</a>
                 </div>
                 
             </div>
@@ -76,23 +76,49 @@
 
 <script>
 
-    // (() => {
+    export default {
 
-    //         const form = document.querySelector('.needs-validation');
+        name: 'Revisao',
+        data() {
 
-    //         form.addEventListener('submit', event => {
+            return {
+                nome: '',
+                cpf: '',
+                numero: '',
+                estado: '',
+                cidade: '',
+                especialidade: '',
+                valor: 0,
+                formPgto: '',
+                condicoes: ''
+            }
+        },
+        methods: {
 
-    //             if (!form.checkValidity()) {
-    //                 event.preventDefault()
-    //                 event.stopPropagation()
-    //             }
+            getDadosForm() {
 
-    //             form.classList.add('was-validated');
-            
-    //         }, false);
-          
+                const dadosForm = JSON.parse(localStorage.getItem('dadosForm'));
 
-    // })()
+                const { nome, cpf, numero, estado, cidade } = dadosForm;
+
+                this.nome = nome;
+                this.cpf = cpf;
+                this.numero = numero;
+                this.estado = estado;
+                this.cidade = cidade;
+
+
+            }
+
+        },
+        mounted() {
+
+            this.getDadosForm();
+
+        }
+
+
+    }
 
 
 </script>
