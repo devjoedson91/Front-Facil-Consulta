@@ -292,7 +292,7 @@
                         const cpf = document.querySelector('[name=cpf]').value;
                         const numero = document.querySelector('[name=numero]').value;
                         const estado = document.querySelector('#estado').value;
-                        const cidade = document.querySelector('[name=cidade]').value;
+                        const cidade = document.querySelector('#cidade').value;
 
                         this.formValue = {nome, cpf, numero, estado, cidade};
 

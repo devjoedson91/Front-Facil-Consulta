@@ -16,7 +16,7 @@
                     <div class="mb-3">
                         
                         <label for="especialidade" class="form-label">Especialidade principal*</label>
-                        <select name="especialidade" class="form-select" required>
+                        <select name="especialidade" id="especialidade" class="form-select" required>
                             <option value="">Selecione a especialidade</option>
                             <option class="option-select" v-for="especialidade in especialidades" :key="especialidade.id">{{ especialidade.nome }}</option>
                         </select>    
@@ -28,7 +28,7 @@
                         <label for="valor" class="form-label">Informe o preço da consulta*</label>
                         <div class="input-group flex-nowrap" id="valor-consulta">
                             <span class="input-group-text bg-main" id="addon-wrapping">R$</span>
-                            <input type="text" class="form-control" v-model="valorConsulta" maxlength="6" id="value" placeholder="Valor" required>
+                            <input type="text" name="valor" class="form-control" v-model="valorConsulta" maxlength="6" id="valor" placeholder="Valor" required>
                         </div>
                         <div class="invalid-feedback">
                             Error message
@@ -110,6 +110,7 @@
 
                 especialidades: null,
                 valorConsulta: '',
+                formValue: null
                 
             }
             
@@ -134,7 +135,7 @@
 
             inputsValidate() {
 
-                const valor = document.querySelector('#value');
+                const valor = document.querySelector('#valor');
 
                 valor.addEventListener('keypress', e => {
 
@@ -159,31 +160,63 @@
                 });
                
 
-            }
+            },
 
-        },
-
-        mounted() {
-
-            (() => {
+             submitForm() {
 
                 const form = document.querySelector('.needs-validation');
 
                 form.addEventListener('submit', event => {
 
                     if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
+
+                        event.preventDefault();
+                        event.stopPropagation();
+                        form.classList.add('was-validated');
+
+                    } else {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        const especialidade = document.querySelector('#especialidade').value;
+                        const valorConsulta = document.querySelector('#valor').value;
+                        
+                        this.formValue = {especialidade, valorConsulta};
+
+                        if (localStorage.length === 0) {
+
+                            alert('Para prosseguir, preencha os dados básicos na pagina anterior!');
+                            return false;
+
+                        }
+
+                        if (localStorage.length > 0) {
+
+                            const noteEdit = JSON.parse(localStorage.getItem("dadosForm"));
+                
+                            const newStorage = Object.assign(noteEdit, this.formValue);
+                                
+                            localStorage.setItem("dadosForm", JSON.stringify(newStorage));
+
+                            console.log(JSON.parse(localStorage.getItem("dadosForm")));
+
+                        }
+                        
+
                     }
 
-                    form.classList.add('was-validated');
-                
-                });
 
-            })();
+                });
+            }
+
+        },
+
+        async mounted() {
 
             this.getEspecialidades();
             this.inputsValidate();
+            this.submitForm();
 
         }
 
