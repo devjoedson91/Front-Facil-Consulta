@@ -28,7 +28,7 @@
                         <label for="valor" class="form-label">Informe o preço da consulta*</label>
                         <div class="input-group flex-nowrap" id="valor-consulta">
                             <span class="input-group-text bg-main" id="addon-wrapping">R$</span>
-                            <input type="text" name="valor" class="form-control" v-model="valorConsulta" maxlength="6" id="valor" v-on:keyup="inputsValidate" placeholder="Valor" required>
+                            <input type="text" name="valor" class="form-control" v-model="valorConsulta" maxlength="6" id="valor" v-on:keyup="inputsValidate" size="6" placeholder="Valor" required>
                         </div>
                         <div class="invalid-feedback">
                             Error message
@@ -136,9 +136,9 @@
 
             inputsValidate() {
 
-                const valor = document.querySelector('#valor');
+                const inputValue = document.querySelector('#valor');
 
-                valor.addEventListener('keypress', e => {
+                inputValue.addEventListener('keypress', e => {
 
                     if (e.key === ',' || e.key === '.') e.preventDefault();
 
@@ -148,7 +148,7 @@
 
                 console.log(valueMask);
 
-                valor.value = valueMask;             
+                inputValue.value = valueMask;
 
             },
 
@@ -180,7 +180,9 @@
 
                 const form = document.querySelector('.needs-validation');
 
-                console.log('valor: ',this.valorConsulta);
+                const inputValue = document.querySelector('#valor').value.replace(',', '.');
+
+                console.log('input', parseFloat(inputValue.replace(',', '.')));
 
                 if (!form.checkValidity()) {
 
@@ -188,7 +190,7 @@
                     e.stopPropagation();
                     form.classList.add('was-validated');
 
-                } else if (Number(this.valorConsulta) < 30 || Number(this.valorConsulta) > 350) {
+                } else if (parseFloat(inputValue) < 30 || parseFloat(inputValue) > 350) {
 
                     e.preventDefault();
                     e.stopPropagation();
@@ -197,8 +199,8 @@
 
                 } else {
 
-                    e.preventDefault();
-                    e.stopPropagation();
+                    // e.preventDefault();
+                    // e.stopPropagation();
 
                     const especialidade = document.querySelector('#especialidade').value;
                     const valorConsulta = document.querySelector('#valor').value;
