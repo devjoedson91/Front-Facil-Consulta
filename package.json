@@ -8,8 +8,12 @@
     "backend": "json-server --watch db/db.json"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "cleave.js": "^1.6.0",
     "core-js": "^3.8.3",
+    "jquery": "^3.6.0",
     "json-server": "^0.17.0",
+    "v-mask": "^2.3.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },
