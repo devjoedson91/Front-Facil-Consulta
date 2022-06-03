@@ -11,7 +11,7 @@
 
                 <h5 class="mb-4 fw-bold">Detalhes do atendimento</h5>
 
-                <form action="/revisao" class="row needs-validation" novalidate>
+                <form action="/revisao" class="row needs-validation" @submit="submitForm($event)" novalidate>
                     
                     <div class="mb-3">
                         
@@ -28,7 +28,7 @@
                         <label for="valor" class="form-label">Informe o preço da consulta*</label>
                         <div class="input-group flex-nowrap" id="valor-consulta">
                             <span class="input-group-text bg-main" id="addon-wrapping">R$</span>
-                            <input type="text" name="valor" class="form-control" v-model="valorConsulta" maxlength="6" id="valor" @keyup="this.inputsValidate()" placeholder="Valor" required>
+                            <input type="text" name="valor" class="form-control" v-model="valorConsulta" maxlength="6" id="valor" v-on:keyup="inputsValidate" placeholder="Valor" required>
                         </div>
                         <div class="invalid-feedback">
                             Error message
@@ -176,73 +176,72 @@
 
             },
 
-             submitForm() {
+            submitForm(e) {
 
                 const form = document.querySelector('.needs-validation');
 
-                form.addEventListener('submit', event => {
+                console.log('valor: ',this.valorConsulta);
 
-                    if (!form.checkValidity()) {
+                if (!form.checkValidity()) {
 
-                        event.preventDefault();
-                        event.stopPropagation();
-                        form.classList.add('was-validated');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    form.classList.add('was-validated');
 
-                    } else {
+                } else if (Number(this.valorConsulta) < 30 || Number(this.valorConsulta) > 350) {
 
-                        // event.preventDefault();
-                        // event.stopPropagation();
+                    e.preventDefault();
+                    e.stopPropagation();
 
-                        const especialidade = document.querySelector('#especialidade').value;
-                        const valorConsulta = document.querySelector('#valor').value;
-                        const formInputs = document.querySelectorAll('.form-check-input');
-                        const labels = document.querySelectorAll('.form-check label');
-                        let formsPgto = '';
+                    alert('O valor da consulta deve esta entre R$ 30,00 e R$ 350,00');
 
-                        formInputs.forEach((item, index) => {
+                } else {
 
-                            if (item.checked) {
+                    e.preventDefault();
+                    e.stopPropagation();
 
-                                for (let i = 0; i < labels.length; i++) {
+                    const especialidade = document.querySelector('#especialidade').value;
+                    const valorConsulta = document.querySelector('#valor').value;
+                    const formInputs = document.querySelectorAll('.form-check-input');
+                    const labels = document.querySelectorAll('.form-check label');
+                    let formsPgto = '';
 
-                                    formsPgto += labels[index].innerHTML;
-                                    break;
+                    formInputs.forEach((item, index) => {
 
-                                }
+                        if (item.checked) {
 
-                                console.log(formsPgto);
+                            for (let i = 0; i < labels.length; i++) {
+
+                                formsPgto += labels[index].innerHTML;
+                                break;
+
                             }
 
-                        });
-                        
-                        this.formValue = {especialidade, valorConsulta, formsPgto};
-
-
-
-                        if (localStorage.length === 0) {
-
-                            alert('Para prosseguir, preencha os dados básicos na pagina anterior!');
-                            return false;
-
+                                    // console.log(formsPgto);
                         }
 
-                        if (localStorage.length > 0) {
-
-                            const noteEdit = JSON.parse(localStorage.getItem("dadosForm"));
-                
-                            const newStorage = Object.assign(noteEdit, this.formValue);
-                                
-                            localStorage.setItem("dadosForm", JSON.stringify(newStorage));
-
-                            console.log(JSON.parse(localStorage.getItem("dadosForm")));
-
-                        }
+                    });
                         
+                    this.formValue = {especialidade, valorConsulta, formsPgto};
+
+                    if (localStorage.length === 0) {
+
+                        alert('Para prosseguir, preencha os dados básicos na pagina anterior!');
+                        return false;
 
                     }
 
+                   if (localStorage.length > 0) {
 
-                });
+                       const noteEdit = JSON.parse(localStorage.getItem("dadosForm"));
+                       const newStorage = Object.assign(noteEdit, this.formValue);
+                       localStorage.setItem("dadosForm", JSON.stringify(newStorage));
+
+                       console.log(JSON.parse(localStorage.getItem("dadosForm")));
+                    }
+                        
+
+                }
             }
 
         },
@@ -251,7 +250,6 @@
 
             this.getEspecialidades();
             this.checkedPgto();
-            this.submitForm();
 
         }
 
