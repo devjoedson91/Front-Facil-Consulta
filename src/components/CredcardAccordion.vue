@@ -1,0 +1,47 @@
+<template>
+	<div :class="open ? 'faq open' : 'faq'">
+		<div class="question">
+            <div class="form-check">
+                <input class="form-check-input ms-4" type="checkbox" value="" id="cartao">
+                <label class="form-check-label ms-4" @click="$emit('toggleOpen', index)" for="cartao">
+                    Cartão de crédito
+                </label>
+           </div>
+
+        </div>
+		<div class="answer">
+            <div class="form-check mb-3">
+                <label class="form-check-label ms-6" for="defaultCheck1">
+                    Parcelamento em
+                </label>                         
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input check-parcelamento ms-6" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label ms-2" for="defaultCheck1">
+                    1x sem juros
+                </label>                     
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input check-parcelamento ms-6" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label ms-2" for="defaultCheck1">
+                    2x sem juros
+                </label>                     
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input check-parcelamento ms-6" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label ms-2" for="defaultCheck1">
+                    3x sem juros
+                </label>                     
+            </div>
+
+        </div>
+                                
+	</div>
+</template>
+
+<script>
+export default {
+	name: 'FAQ',
+	props: ['faq', 'index', 'open']
+}
+</script>

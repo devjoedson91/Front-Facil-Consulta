@@ -57,16 +57,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="breadcrumb mb-3 shadow p-3 bg-body rounded">
-                            <div class="breadcrumb-item">
-                                <div class="form-check">
-                                    <input class="form-check-input ms-4" type="checkbox" value="" id="cartao">
-                                    <label class="form-check-label ms-4" for="cartao">
-                                      Cartão de crédito
-                                    </label>
-                                </div>
-                            </div>
+
+                        <div class="">
+                            <CredcardAccordion 
+                                v-for="(faq, i) in faqs" 
+                                :faq="faq" 
+                                :index="i" 
+                                :key="i"
+                                :open="faq.open"
+                                @toggleOpen="toggleOpen"
+                            />
                         </div>
+
                     </div>
 
                     <div>
@@ -98,12 +100,14 @@
     import api from '@/services/api';
     import { mask, unMask } from 'remask';
     import ProximoBtn from '@/components/ProximoBtn.vue';
+    import CredcardAccordion from '@/components/CredcardAccordion.vue';
     
     export default {
 
         name: 'Atendimento',
         components: {
-            ProximoBtn
+            ProximoBtn,
+            CredcardAccordion
         },
         data() {
             
@@ -111,12 +115,29 @@
 
                 especialidades: null,
                 valorConsulta: null,
-                formValue: null
+                formValue: null,
+                faqs: [
+                    {
+                        open: false
+                    }
+                ]
                 
             }
             
         },
         methods: {
+
+            toggleOpen: function (index) {
+                this.faqs = this.faqs.map((faq, i) => {
+                    if (index === i) {
+                    faq.open = !faq.open;
+                    } else {
+                    faq.open = false;
+                    }
+
+                    return faq;
+                });
+            },
 
             async getEspecialidades() {
 
@@ -176,72 +197,88 @@
 
             },
 
+            stopPropagation(e, form) {
+
+                e.preventDefault();
+                e.stopPropagation();
+                form.classList.add('was-validated');
+
+            },
+
             submitForm(e) {
 
                 const form = document.querySelector('.needs-validation');
 
                 const inputValue = document.querySelector('#valor').value.replace(',', '.');
 
-                console.log('input', parseFloat(inputValue.replace(',', '.')));
-
                 if (!form.checkValidity()) {
 
-                    e.preventDefault();
-                    e.stopPropagation();
-                    form.classList.add('was-validated');
+                    this.stopPropagation(e, form);
 
                 } else if (parseFloat(inputValue) < 30 || parseFloat(inputValue) > 350) {
 
-                    e.preventDefault();
-                    e.stopPropagation();
-
                     alert('O valor da consulta deve esta entre R$ 30,00 e R$ 350,00');
+
+                    this.stopPropagation(e, form);
 
                 } else {
 
-                    // e.preventDefault();
-                    // e.stopPropagation();
+                    e.preventDefault();
+                    e.stopPropagation();
 
-                    const especialidade = document.querySelector('#especialidade').value;
-                    const valorConsulta = document.querySelector('#valor').value;
                     const formInputs = document.querySelectorAll('.form-check-input');
-                    const labels = document.querySelectorAll('.form-check label');
+                    const labelFormPgto = document.querySelectorAll('.form-check label');
                     let formsPgto = '';
+                    let condicoes = '';
+                    let itemChecked = null;
 
                     formInputs.forEach((item, index) => {
 
                         if (item.checked) {
 
-                            for (let i = 0; i < labels.length; i++) {
+                            for (let i = 0; i < labelFormPgto.length; i++) {
 
-                                formsPgto += labels[index].innerHTML;
+                                formsPgto += labelFormPgto[index].innerHTML;
                                 break;
 
                             }
 
-                                    // console.log(formsPgto);
+                            itemChecked = item;
                         }
 
                     });
-                        
-                    this.formValue = {especialidade, valorConsulta, formsPgto};
 
-                    if (localStorage.length === 0) {
+                    
+                    if (itemChecked.id === 'cartao') {
 
-                        alert('Para prosseguir, preencha os dados básicos na pagina anterior!');
-                        return false;
+                        const checkParcelamento = document.querySelectorAll('.check-parcelamento');
 
-                    }
 
-                   if (localStorage.length > 0) {
 
-                       const noteEdit = JSON.parse(localStorage.getItem("dadosForm"));
-                       const newStorage = Object.assign(noteEdit, this.formValue);
-                       localStorage.setItem("dadosForm", JSON.stringify(newStorage));
+                    } else {
 
-                       console.log(JSON.parse(localStorage.getItem("dadosForm")));
-                    }
-                        
+                        const especialidade = document.querySelector('#especialidade').value;
+                        const valorConsulta = document.querySelector('#valor').value;
+                            
+                        this.formValue = {especialidade, valorConsulta, formsPgto, condicoes};
+
+                        if (localStorage.length === 0) {
+
+                            alert('Para prosseguir, preencha os dados básicos na pagina anterior!');
+                            return false;
+
+                        }
+
+                        if (localStorage.length > 0) {
+
+                            const noteEdit = JSON.parse(localStorage.getItem("dadosForm"));
+                            const newStorage = Object.assign(noteEdit, this.formValue);
+                            localStorage.setItem("dadosForm", JSON.stringify(newStorage));
+
+                            console.log(JSON.parse(localStorage.getItem("dadosForm")));
+                        }
+
+                    }                
 
                 }
             }
@@ -260,3 +297,58 @@
 
 
 </script>
+
+<style>
+
+.faq {
+  display: block;
+  width: 100%;
+  max-width: 768px;
+  margin: 15px auto;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #FFF;
+}
+
+.faq .question {
+  position: relative;
+  color: #3c3c3c;
+  transition: all 0.4s linear;
+}
+
+.faq .question::after {
+  content: '';
+
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%) rotate(0deg);
+  width: 30px;
+  height: 30px;
+  
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+  transition: all 0.2s linear;
+}
+.faq.open .question {
+  margin-bottom: 15px;
+}
+.faq.open .question::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+.faq .answer {
+  color: #3c3c3c;
+  opacity: 0;
+  max-height: 0px;
+  overflow-y: hidden;
+  transition: all 0.4s ease-out;
+}
+.faq.open .answer {
+  opacity: 1;
+  max-height: 1000px;
+}    
+
+</style>

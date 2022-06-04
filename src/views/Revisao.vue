@@ -102,7 +102,7 @@
 
                 const dadosForm = JSON.parse(localStorage.getItem('dadosForm'));
 
-                const { nome, cpf, numero, estado, cidade, especialidade, valorConsulta, formsPgto } = dadosForm;
+                const { nome, cpf, numero, estado, cidade, especialidade, valorConsulta, formsPgto, condicoes } = dadosForm;
 
                 this.nome = nome;
                 this.cpf = cpf;
@@ -112,6 +112,7 @@
                 this.especialidade = especialidade;
                 this.valor = valorConsulta;
                 this.formsPgto = formsPgto;
+                this.condicoes = condicoes;
 
             }
 
