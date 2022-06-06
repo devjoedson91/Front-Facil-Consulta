@@ -2,7 +2,7 @@
 
    <div class="container">
         <div class="btn-back fs-4">
-            <a href="/atendimento"></a>
+            <a href="/atendimento">{{ backButton }}</a>
         </div>
         <div class="row main-container shadow p-5">
             <div class="col-6 form-main">
@@ -93,7 +93,8 @@
                 especialidade: '',
                 valor: 0,
                 formsPgto: '',
-                condicoes: ''
+                condicoes: '',
+                backButton: '<'
             }
         },
         methods: {

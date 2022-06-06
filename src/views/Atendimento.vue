@@ -2,7 +2,7 @@
 
    <div class="container">
         <div class="btn-back fs-4">
-            <a href="/"></a>
+            <a href="/">{{ backButton }}</a>
         </div>
         <div class="row main-container shadow p-5">
             <div class="col-6 form-main">
@@ -120,7 +120,8 @@
                     {
                         open: false
                     }
-                ]
+                ],
+                backButton: '<'
                 
             }
             
