@@ -8,7 +8,7 @@
 
                 <h5 class="mb-4 fw-bold">Dados do profissional</h5>
 
-                <form action="/atendimento" class="row needs-validation" novalidate>
+                <form action="/atendimento" class="row needs-validation" @submit="submitForm($event)" novalidate>
                     
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome completo*</label>
@@ -275,22 +275,20 @@
 
             },
 
-            submitForm() {
+            submitForm(e) {
 
                 const form = document.querySelector('.needs-validation');
+                
+                if (!form.checkValidity()) {
 
-                form.addEventListener('submit', event => {
-
-                    if (!form.checkValidity()) {
-
-                        event.preventDefault();
-                        event.stopPropagation();
+                        e.preventDefault();
+                        e.stopPropagation();
                         form.classList.add('was-validated');
 
                     } else {
 
-                        // event.preventDefault();
-                        // event.stopPropagation();
+                        // e.preventDefault();
+                        // e.stopPropagation();
 
                         const nome = document.querySelector('[name=nome]').value;
                         const cpf = document.querySelector('[name=cpf]').value;
@@ -335,9 +333,7 @@
                         console.log(this.formValue);
 
                     }
-
-
-                });
+                
             }
 
         },   
@@ -349,7 +345,6 @@
             this.getProfissionais();
             this.inputsValidate();
             this.validateSelects();
-            this.submitForm();
 
             if (localStorage.length > 0) {
 

@@ -128,8 +128,12 @@
         },
         methods: {
 
-            toggleOpen: function (index) {
+            toggleOpen(index) {
+
                 this.faqs = this.faqs.map((faq, i) => {
+
+                    console.log(!faq.open);
+
                     if (index === i) {
                     faq.open = !faq.open;
                     } else {
@@ -182,7 +186,14 @@
 
                     if (checkPgto[2].checked) {
 
-                        checkPgto[i].checked = checkPgto[i] === caller; 
+                        checkPgto[i].checked = checkPgto[i] === caller;
+
+                        if (caller.value === 'd' || caller.id === 'p') {
+
+                            this.toggleOpen(1);
+
+                        }
+
 
                     }                                
                                 
