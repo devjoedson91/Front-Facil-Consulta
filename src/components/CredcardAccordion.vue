@@ -15,21 +15,21 @@
                     Parcelamento em
                 </label>                         
             </div>
-            <div class="form-check mb-3">
-                <input class="form-check-input check-parcelamento ms-6" v-on:click="clicar" type="checkbox" value="1x" id="1x">
-                <label class="form-check-label ms-2" for="defaultCheck1">
+            <div class="form-check  mb-3">
+                <input class="form-check-input check-parcelamento ms-6" @click="check" type="checkbox" value="1x" id="1x">
+                <label class="form-check-label check-label ms-2" for="defaultCheck1">
                     1x sem juros
                 </label>                     
             </div>
             <div class="form-check mb-3">
-                <input class="form-check-input check-parcelamento ms-6" v-on:click="clicar" type="checkbox" value="2x" id="2x">
-                <label class="form-check-label ms-2" for="defaultCheck1">
+                <input class="form-check-input check-parcelamento ms-6" @click="check" type="checkbox" value="2x" id="2x">
+                <label class="form-check-label check-label ms-2" for="defaultCheck1">
                     2x sem juros
                 </label>                     
             </div>
             <div class="form-check mb-3">
-                <input class="form-check-input check-parcelamento ms-6" v-on:click="clicar" type="checkbox" value="3x" id="3x">
-                <label class="form-check-label ms-2" for="defaultCheck1">
+                <input class="form-check-input check-parcelamento ms-6" @click="check" type="checkbox" value="3x" id="3x">
+                <label class="form-check-label check-label ms-2" for="defaultCheck1">
                     3x sem juros
                 </label>                     
             </div>
@@ -45,16 +45,17 @@ export default {
 	props: ['faq', 'index', 'open'],
     methods: {
 
-        clicar(event) {
+        check(event) {
 
             const checkParcelamento = document.querySelectorAll('.check-parcelamento');
-            const checkPgto = document.querySelector('#cartao');
-
+            
             for (let i = 0; i < checkParcelamento.length; i++) {
 
                 checkParcelamento[i].checked = checkParcelamento[i] === event.target;
                                         
             }
+
+            
         }
     }
 }

@@ -132,8 +132,6 @@
 
                 this.faqs = this.faqs.map((faq, i) => {
 
-                    console.log(!faq.open);
-
                     if (index === i) {
                     faq.open = !faq.open;
                     } else {
@@ -178,32 +176,10 @@
 
             },
 
-            marcaDesmarca(caller) {
-
-                const checkPgto = document.querySelectorAll('.check-pgto');
-
-                 for (let i = 0; i < checkPgto.length; i++) {
-
-                    if (checkPgto[2].checked) {
-
-                        checkPgto[i].checked = checkPgto[i] === caller;
-
-                        if (caller.value === 'd' || caller.id === 'p') {
-
-                            this.toggleOpen(1);
-
-                        }
-
-
-                    }                                
-                                
-                 }
-            
-            },
-
             checkedPgto() {
 
-                const formsPgto = document.querySelectorAll('.form-check-input');
+                const formsPgto = document.querySelectorAll('.check-pgto');
+                const checkParcelamento = document.querySelectorAll('.check-parcelamento');
 
                 formsPgto.forEach(formPgto => {
 
@@ -219,8 +195,25 @@
 
                         }
 
-                        this.marcaDesmarca(e.target);
-                  
+                        for (let i = 0; i < formsPgto.length; i++) {
+
+                            if (formsPgto[2].checked) {
+
+                                formsPgto[i].checked = formsPgto[i] === e.target;
+
+                                checkParcelamento[0].checked = true;
+                                checkParcelamento[1].checked = false;
+                                checkParcelamento[2].checked = false;
+
+                            }                                
+                                        
+                        }
+                        
+                        if (e.target.value === 'd' || e.target.value === 'p') {
+
+                            this.toggleOpen(1);
+
+                        }
 
                     }, false);
 
@@ -257,11 +250,12 @@
                     // e.preventDefault();
                     // e.stopPropagation();
 
-                    const formInputs = document.querySelectorAll('.form-check-input');
+                    const formInputs = document.querySelectorAll('.check-pgto');
                     const labelFormPgto = document.querySelectorAll('.form-check label');
+                    const checkParcelamento = document.querySelectorAll('.check-parcelamento');
+                    const labelParcelamento = document.querySelectorAll('.check-label');
                     let formsPgto = '';
                     let condicoes = '';
-                    let itemChecked = null;
 
                     formInputs.forEach((item, index) => {
 
@@ -274,41 +268,46 @@
 
                             }
 
-                            itemChecked = item;
                         }
 
                     });
 
-                    
-                    if (itemChecked.id === 'cartao') {
+                    checkParcelamento.forEach((item, index) => {
 
-                        const checkParcelamento = document.querySelectorAll('.check-parcelamento');
+                        if (item.checked) {
 
-                    } else {
+                            for (let i = 0; i < labelParcelamento.length; i++) {
 
-                        const especialidade = document.querySelector('#especialidade').value;
-                        const valorConsulta = document.querySelector('#valor').value;
+                                condicoes += labelParcelamento[index].innerHTML;
+                                break;
+
+                            }
+
+                        }
+
+                    });
+
+                    const especialidade = document.querySelector('#especialidade').value;
+                    const valorConsulta = document.querySelector('#valor').value;
                             
-                        this.formValue = {especialidade, valorConsulta, formsPgto, condicoes};
+                    this.formValue = {especialidade, valorConsulta, formsPgto, condicoes};
 
-                        if (localStorage.length === 0) {
+                    if (localStorage.length === 0) {
 
-                            alert('Para prosseguir, preencha os dados básicos na pagina anterior!');
-                            return false;
+                        alert('Para prosseguir, preencha os dados básicos na pagina anterior!');
+                        return false;
 
-                        }
+                    }
 
-                        if (localStorage.length > 0) {
+                    if (localStorage.length > 0) {
 
-                            const noteEdit = JSON.parse(localStorage.getItem("dadosForm"));
-                            const newStorage = Object.assign(noteEdit, this.formValue);
-                            localStorage.setItem("dadosForm", JSON.stringify(newStorage));
+                        const noteEdit = JSON.parse(localStorage.getItem("dadosForm"));
+                        const newStorage = Object.assign(noteEdit, this.formValue);
+                        localStorage.setItem("dadosForm", JSON.stringify(newStorage));
 
-                            console.log(JSON.parse(localStorage.getItem("dadosForm")));
-                        }
-
-                    }                
-
+                        console.log(JSON.parse(localStorage.getItem("dadosForm")));
+                    }
+                    
                 }
             }
 
