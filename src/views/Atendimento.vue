@@ -40,7 +40,7 @@
                         <div class="breadcrumb mb-3 shadow p-3 bg-body rounded">
                             <div class="breadcrumb-item">
                                 <div class="form-check">
-                                    <input class="form-check-input ms-4" type="checkbox" value="" id="pix">
+                                    <input class="form-check-input check-pgto ms-4" type="checkbox" value="p" id="pix">
                                     <label class="form-check-label ms-4" for="pix">
                                       Pix
                                     </label>
@@ -50,7 +50,7 @@
                         <div class="breadcrumb mb-3 shadow p-3 bg-body rounded">
                             <div class="breadcrumb-item">
                                 <div class="form-check">
-                                    <input class="form-check-input ms-4" type="checkbox" value="" id="dinheiro">
+                                    <input class="form-check-input check-pgto ms-4" type="checkbox" value="d" id="dinheiro">
                                     <label class="form-check-label ms-4" for="dinheiro">
                                       Em dinheiro
                                     </label>
@@ -173,6 +173,41 @@
 
             },
 
+            marcaDesmarca(caller) {
+
+                const checkPgto = document.querySelectorAll('.check-pgto');
+
+                 for (let i = 0; i < checkPgto.length; i++) {
+
+                    if (checkPgto[2].checked) {
+
+                        checkPgto[i].checked = checkPgto[i] === caller; 
+
+                    }                                
+                                
+                 }
+                 
+                 const checkParcelamento = document.querySelectorAll('.check-parcelamento');
+
+                 checkParcelamento.forEach(check => {
+
+                    check.addEventListener('click', e => {
+
+                        console.log(e.target);
+
+                        for (let i = 0; i < checkParcelamento.length; i++) {
+
+                            console.log('pagamento: ', checkPgto[i]);
+                            checkParcelamento[i].checked = checkParcelamento[i] === e.target;
+                                        
+                        }
+
+                    });
+
+                });
+
+            },
+
             checkedPgto() {
 
                 const formsPgto = document.querySelectorAll('.form-check-input');
@@ -190,6 +225,9 @@
                             formPgto.setAttribute("checked", "false");
 
                         }
+
+                        this.marcaDesmarca(e.target);
+                  
 
                     }, false);
 

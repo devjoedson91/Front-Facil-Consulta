@@ -2,8 +2,8 @@
 	<div :class="open ? 'faq open' : 'faq'">
 		<div class="question">
             <div class="form-check">
-                <input class="form-check-input ms-4" type="checkbox" value="" id="cartao">
-                <label class="form-check-label ms-4" @click="$emit('toggleOpen', index)" for="cartao">
+                <input class="form-check-input check-pgto ms-4" type="checkbox" value="c" id="cartao" @click="$emit('toggleOpen', index)">
+                <label class="form-check-label ms-4" for="cartao">
                     Cartão de crédito
                 </label>
            </div>
