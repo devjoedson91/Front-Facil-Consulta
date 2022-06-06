@@ -261,8 +261,8 @@
 
                 } else {
 
-                    e.preventDefault();
-                    e.stopPropagation();
+                    // e.preventDefault();
+                    // e.stopPropagation();
 
                     const formInputs = document.querySelectorAll('.form-check-input');
                     const labelFormPgto = document.querySelectorAll('.form-check label');
@@ -290,8 +290,6 @@
                     if (itemChecked.id === 'cartao') {
 
                         const checkParcelamento = document.querySelectorAll('.check-parcelamento');
-
-
 
                     } else {
 
