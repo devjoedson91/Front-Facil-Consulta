@@ -1,9 +1,9 @@
 <template>
 
    <div class="container">
-        <!-- <div class="btn-back fs-4">
-            <a href="/views/index.html"></a>
-        </div> -->
+        <div class="btn-back fs-4">
+            <a href="/"></a>
+        </div>
         <div class="row main-container shadow p-5">
             <div class="col-6 form-main">
             
@@ -186,26 +186,7 @@
                     }                                
                                 
                  }
-                 
-                 const checkParcelamento = document.querySelectorAll('.check-parcelamento');
-
-                 checkParcelamento.forEach(check => {
-
-                    check.addEventListener('click', e => {
-
-                        console.log(e.target);
-
-                        for (let i = 0; i < checkParcelamento.length; i++) {
-
-                            console.log('pagamento: ', checkPgto[i]);
-                            checkParcelamento[i].checked = checkParcelamento[i] === e.target;
-                                        
-                        }
-
-                    });
-
-                });
-
+            
             },
 
             checkedPgto() {

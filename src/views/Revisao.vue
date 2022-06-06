@@ -1,9 +1,9 @@
 <template>
 
    <div class="container">
-        <!-- <div class="btn-back fs-4">
-            <a href="treatment02.html"><</a>
-        </div> -->
+        <div class="btn-back fs-4">
+            <a href="/atendimento"></a>
+        </div>
         <div class="row main-container shadow p-5">
             <div class="col-6 form-main">
             
