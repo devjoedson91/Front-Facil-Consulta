@@ -48,7 +48,7 @@
                 <div class="mb-3">
                     <label for="cpf" class="fw-bold">Forma de pagamento da consulta</label>
                     <div class="input-group flex-nowrap">
-                        <div class="fs-6">{{formsPgto}} {{condicoes}}</div>
+                        <div class="fs-6">{{formsPgto}}{{condicoes}}</div>
                     </div>
                 </div>
 
@@ -112,8 +112,8 @@
                 this.cidade = cidade;
                 this.especialidade = especialidade;
                 this.valor = valorConsulta;
-                this.formsPgto = formsPgto;
-                this.condicoes = condicoes;
+                this.formsPgto = formsPgto.replace('  ', ' - ');
+                this.condicoes = condicoes !== '' ? `- ${condicoes}` : '';
 
             },
 
