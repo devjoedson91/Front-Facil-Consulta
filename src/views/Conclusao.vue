@@ -4,11 +4,11 @@
         
         <div class="row main-container shadow p-5">
             
-            
+            <h2 class="mb-4">Parabens! Cadastro feito com sucesso.</h2>
                 
 
             <div class="col-6 mx-auto align-items-center">
-                <img src="../../public/img/desktop-pagina-3.png" class="img-fluid" alt="desk-pagina3">
+                <img src="../../public/img/medico-obstetra.png" class="img-fluid" alt="desk-pagina4">
             </div>
 
         </div>
@@ -29,3 +29,14 @@
 
 
 </script>
+
+<style scoped>
+
+    .main-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+
+    }
+
+</style>
