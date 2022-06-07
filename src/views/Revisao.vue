@@ -115,7 +115,7 @@
                 this.formsPgto = formsPgto;
                 this.condicoes = condicoes;
 
-            }
+            },
 
         },
         mounted() {
