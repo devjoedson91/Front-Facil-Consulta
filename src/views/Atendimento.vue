@@ -283,7 +283,11 @@
 
                             }
 
+                            if (formsPgto !== 'cartao') condicoes = '';
+
                         }
+
+                        
 
                     });
 
